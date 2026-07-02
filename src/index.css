@@ -188,8 +188,8 @@ button:active {
 }
 
 .image-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
 }
 
 .image-card img {
@@ -197,6 +197,14 @@ button:active {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.image-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.03);
 }
 
 .see-all-container {
