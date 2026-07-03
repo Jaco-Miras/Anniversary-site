@@ -296,24 +296,83 @@ button:active {
 }
 
 .modal-close-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  border: none;
-  background: rgba(255, 255, 255, 0.95);
-  color: #ff4d6d;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 24px;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 48px;
+  height: 48px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #ff4d6d;
+
+  font-size: 24px;
+  cursor: pointer;
+
+  z-index: 100;
+  transition: 0.25s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close-btn:hover {
+  transform: scale(1.08);
+}
+
+.modal-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 56px;
+  height: 56px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #ff4d6d;
+
+  font-size: 28px;
+  cursor: pointer;
+
+  transition: 0.25s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-nav-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  background: white;
+}
+
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
 }
 
 .modal-close-btn:hover {
@@ -673,4 +732,101 @@ footer p {
   footer p {
     font-size: 1rem;
   }
+}
+
+.music-player {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.music-player iframe {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.letter-modal {
+  position: relative;
+  width: min(700px, 92vw);
+  max-height: 85vh;
+  overflow-y: auto;
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+
+  padding: 40px;
+
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+
+  color: white;
+
+  animation: openLetter 0.45s ease;
+}
+
+.modal-overlay::before,
+.modal-overlay::after {
+  content: "❤";
+  position: absolute;
+  font-size: 40px;
+  opacity: 0.25;
+  animation: floatHeart 6s linear infinite;
+}
+
+.modal-overlay::before {
+  left: 15%;
+  bottom: -30px;
+}
+
+.modal-overlay::after {
+  right: 20%;
+  animation-delay: 2s;
+}
+
+@keyframes floatHeart {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-120vh) rotate(360deg);
+  }
+}
+
+.close-btn {
+  position: sticky;
+  top: 20px;
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.95);
+  color: #ff4d6d;
+  font-size: 24px;
+  cursor: pointer;
+
+  z-index: 100;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.08);
+  background: white;
 }

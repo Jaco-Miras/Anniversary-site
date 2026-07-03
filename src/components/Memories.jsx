@@ -15,8 +15,16 @@ const allImages = Object.entries(imageModules)
   .map(([, src]) => src);
 const Memories = () => {
   const [showAll, setShowAll] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
   const images = showAll ? allImages : allImages.slice(0, 8);
+
+  const nextImage = () => {
+    setSelectedIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setSelectedIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
     <section className="section">
@@ -28,7 +36,7 @@ const Memories = () => {
             key={`${src}-${index}`}
             type="button"
             className="image-card"
-            onClick={() => setSelectedImage(src)}
+            onClick={() => setSelectedIndex(index)}
             aria-label={`View memory ${index + 1}`}
           >
             <img src={src} alt={`Memory ${index + 1}`} />
@@ -48,18 +56,25 @@ const Memories = () => {
         </div>
       )}
 
-      {selectedImage && (
-        <div className="modal-overlay" onClick={() => setSelectedImage(null)}>
+      {selectedIndex !== null && (
+        <div className="modal-overlay" onClick={() => setSelectedIndex(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-nav-btn prev-btn" onClick={prevImage}>
+              ❮
+            </button>
+
+            <img src={images[selectedIndex]} alt="Memory" />
+
+            <button className="modal-nav-btn next-btn" onClick={nextImage}>
+              ❯
+            </button>
+
             <button
-              type="button"
               className="modal-close-btn"
-              onClick={() => setSelectedImage(null)}
-              aria-label="Close modal"
+              onClick={() => setSelectedIndex(null)}
             >
               ✕
             </button>
-            <img src={selectedImage} alt="Full size memory" />
           </div>
         </div>
       )}
