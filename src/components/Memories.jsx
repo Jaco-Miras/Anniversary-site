@@ -19,11 +19,13 @@ const Memories = () => {
   const images = showAll ? allImages : allImages.slice(0, 8);
 
   const nextImage = () => {
-    setSelectedIndex((prev) => (prev + 1) % images.length);
+    setSelectedIndex((prev) => (prev + 1) % allImages.length);
   };
 
   const prevImage = () => {
-    setSelectedIndex((prev) => (prev - 1 + images.length) % images.length);
+    setSelectedIndex(
+      (prev) => (prev - 1 + allImages.length) % allImages.length,
+    );
   };
 
   return (
@@ -36,7 +38,10 @@ const Memories = () => {
             key={`${src}-${index}`}
             type="button"
             className="image-card"
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => {
+              const actualIndex = allImages.indexOf(src);
+              setSelectedIndex(actualIndex);
+            }}
             aria-label={`View memory ${index + 1}`}
           >
             <img src={src} alt={`Memory ${index + 1}`} />
@@ -63,7 +68,10 @@ const Memories = () => {
               ❮
             </button>
 
-            <img src={images[selectedIndex]} alt="Memory" />
+            <img
+              src={allImages[selectedIndex]}
+              alt={`Memory ${selectedIndex + 1}`}
+            />
 
             <button className="modal-nav-btn next-btn" onClick={nextImage}>
               ❯

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const imageModules = import.meta.glob(
   "/src/assets/pictures/photos_together/*.{jpg,JPG,jpeg,JPEG,png,PNG,webp,WEBP}",
+
   {
     eager: true,
     import: "default",
@@ -16,8 +17,18 @@ const allImages = Object.entries(imageModules)
 
 const MemoriesTogether = () => {
   const [showAll, setShowAll] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const images = showAll ? allImages : allImages.slice(8, 16);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const images = showAll ? allImages : allImages.slice(0, 8);
+
+  const nextImage = () => {
+    setSelectedIndex((prev) => (prev + 1) % allImages.length);
+  };
+
+  const prevImage = () => {
+    setSelectedIndex(
+      (prev) => (prev - 1 + allImages.length) % allImages.length,
+    );
+  };
 
   return (
     <section className="section memories-together">
@@ -30,7 +41,10 @@ const MemoriesTogether = () => {
             key={`${src}-${index}`}
             type="button"
             className="image-card"
-            onClick={() => setSelectedImage(src)}
+            onClick={() => {
+              const actualIndex = allImages.indexOf(src);
+              setSelectedIndex(actualIndex);
+            }}
             aria-label={`View memory ${index + 1}`}
           >
             <img src={src} alt={`Memory ${index + 1}`} />
@@ -50,18 +64,28 @@ const MemoriesTogether = () => {
         </div>
       )}
 
-      {selectedImage && (
-        <div className="modal-overlay" onClick={() => setSelectedImage(null)}>
+      {selectedIndex !== null && (
+        <div className="modal-overlay" onClick={() => setSelectedIndex(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-nav-btn prev-btn" onClick={prevImage}>
+              ❮
+            </button>
+
+            <img
+              src={allImages[selectedIndex]}
+              alt={`Memory ${selectedIndex + 1}`}
+            />
+
+            <button className="modal-nav-btn next-btn" onClick={nextImage}>
+              ❯
+            </button>
+
             <button
-              type="button"
               className="modal-close-btn"
-              onClick={() => setSelectedImage(null)}
-              aria-label="Close modal"
+              onClick={() => setSelectedIndex(null)}
             >
               ✕
             </button>
-            <img src={selectedImage} alt="Full size memory" />
           </div>
         </div>
       )}
