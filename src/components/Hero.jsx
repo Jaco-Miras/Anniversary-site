@@ -47,11 +47,15 @@ const Hero = () => {
       {showMessage && (
         <div className="modal-overlay" onClick={() => setShowMessage(false)}>
           <div className="letter-modal" onClick={(e) => e.stopPropagation()}>
-            {/* <button className="close-btn" onClick={() => setShowMessage(false)}>
+            <button
+              className="close-btn"
+              onClick={() => setShowMessage(false)}
+              aria-label="Close"
+            >
               ✕
-            </button> */}
+            </button>
 
-            <h3>💌 A Letter For You</h3>
+            {/* <h3>💌 A Letter For You</h3> */}
 
             <p style={{ textAlign: "left" }}>
               Four years of loving each other across the distance, and every

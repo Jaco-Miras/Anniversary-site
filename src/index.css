@@ -747,8 +747,7 @@ footer p {
 }
 
 .letter-modal {
-  position: relative;
-  width: min(700px, 92vw);
+  width: min(900px, 92vw);
   max-height: 85vh;
   overflow-y: auto;
 
@@ -771,6 +770,31 @@ footer p {
   color: white;
 
   animation: openLetter 0.45s ease;
+}
+
+.letter-header {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px 30px;
+
+  z-index: 100;
+
+  backdrop-filter: blur(16px);
+  background: linear-gradient(
+    to bottom,
+    rgba(40, 40, 40, 0.95),
+    rgba(40, 40, 40, 0.65)
+  );
+}
+
+.letter-header h3 {
+  margin: 0;
+  font-size: 2rem;
 }
 
 .modal-overlay::before,
