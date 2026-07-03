@@ -75,10 +75,22 @@ body {
 }
 
 .hero h1 {
-  font-size: 4rem;
+  font-size: clamp(2rem, 6vw, 46px);
   font-weight: 800;
   letter-spacing: -1px;
   animation: fadeUp 0.8s ease-out both;
+}
+
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.3rem !important;
+  }
 }
 
 .hero h2 {
